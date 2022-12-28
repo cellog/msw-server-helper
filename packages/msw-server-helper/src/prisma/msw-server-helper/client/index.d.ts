@@ -18,6 +18,7 @@ type UnwrapTuple<Tuple extends readonly unknown[]> = {
  */
 export type Endpoint = {
   endpointMatcher: string
+  method: string
   handlerName: string
   arguments: string | null
 }
@@ -816,18 +817,21 @@ export namespace Prisma {
 
   export type EndpointMinAggregateOutputType = {
     endpointMatcher: string | null
+    method: string | null
     handlerName: string | null
     arguments: string | null
   }
 
   export type EndpointMaxAggregateOutputType = {
     endpointMatcher: string | null
+    method: string | null
     handlerName: string | null
     arguments: string | null
   }
 
   export type EndpointCountAggregateOutputType = {
     endpointMatcher: number
+    method: number
     handlerName: number
     arguments: number
     _all: number
@@ -836,18 +840,21 @@ export namespace Prisma {
 
   export type EndpointMinAggregateInputType = {
     endpointMatcher?: true
+    method?: true
     handlerName?: true
     arguments?: true
   }
 
   export type EndpointMaxAggregateInputType = {
     endpointMatcher?: true
+    method?: true
     handlerName?: true
     arguments?: true
   }
 
   export type EndpointCountAggregateInputType = {
     endpointMatcher?: true
+    method?: true
     handlerName?: true
     arguments?: true
     _all?: true
@@ -933,6 +940,7 @@ export namespace Prisma {
 
   export type EndpointGroupByOutputType = {
     endpointMatcher: string
+    method: string
     handlerName: string
     arguments: string | null
     _count: EndpointCountAggregateOutputType | null
@@ -956,6 +964,7 @@ export namespace Prisma {
 
   export type EndpointSelect = {
     endpointMatcher?: boolean
+    method?: boolean
     handlerName?: boolean
     arguments?: boolean
   }
@@ -1696,6 +1705,7 @@ export namespace Prisma {
 
   export const EndpointScalarFieldEnum: {
     endpointMatcher: 'endpointMatcher',
+    method: 'method',
     handlerName: 'handlerName',
     arguments: 'arguments'
   };
@@ -1728,22 +1738,26 @@ export namespace Prisma {
     OR?: Enumerable<EndpointWhereInput>
     NOT?: Enumerable<EndpointWhereInput>
     endpointMatcher?: StringFilter | string
+    method?: StringFilter | string
     handlerName?: StringFilter | string
     arguments?: StringNullableFilter | string | null
   }
 
   export type EndpointOrderByWithRelationInput = {
     endpointMatcher?: SortOrder
+    method?: SortOrder
     handlerName?: SortOrder
     arguments?: SortOrder
   }
 
   export type EndpointWhereUniqueInput = {
     endpointMatcher?: string
+    endpointMatcher_method?: EndpointEndpointMatcherMethodCompoundUniqueInput
   }
 
   export type EndpointOrderByWithAggregationInput = {
     endpointMatcher?: SortOrder
+    method?: SortOrder
     handlerName?: SortOrder
     arguments?: SortOrder
     _count?: EndpointCountOrderByAggregateInput
@@ -1756,42 +1770,49 @@ export namespace Prisma {
     OR?: Enumerable<EndpointScalarWhereWithAggregatesInput>
     NOT?: Enumerable<EndpointScalarWhereWithAggregatesInput>
     endpointMatcher?: StringWithAggregatesFilter | string
+    method?: StringWithAggregatesFilter | string
     handlerName?: StringWithAggregatesFilter | string
     arguments?: StringNullableWithAggregatesFilter | string | null
   }
 
   export type EndpointCreateInput = {
     endpointMatcher: string
+    method: string
     handlerName: string
     arguments?: string | null
   }
 
   export type EndpointUncheckedCreateInput = {
     endpointMatcher: string
+    method: string
     handlerName: string
     arguments?: string | null
   }
 
   export type EndpointUpdateInput = {
     endpointMatcher?: StringFieldUpdateOperationsInput | string
+    method?: StringFieldUpdateOperationsInput | string
     handlerName?: StringFieldUpdateOperationsInput | string
     arguments?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EndpointUncheckedUpdateInput = {
     endpointMatcher?: StringFieldUpdateOperationsInput | string
+    method?: StringFieldUpdateOperationsInput | string
     handlerName?: StringFieldUpdateOperationsInput | string
     arguments?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EndpointUpdateManyMutationInput = {
     endpointMatcher?: StringFieldUpdateOperationsInput | string
+    method?: StringFieldUpdateOperationsInput | string
     handlerName?: StringFieldUpdateOperationsInput | string
     arguments?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EndpointUncheckedUpdateManyInput = {
     endpointMatcher?: StringFieldUpdateOperationsInput | string
+    method?: StringFieldUpdateOperationsInput | string
     handlerName?: StringFieldUpdateOperationsInput | string
     arguments?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -1824,20 +1845,28 @@ export namespace Prisma {
     not?: NestedStringNullableFilter | string | null
   }
 
+  export type EndpointEndpointMatcherMethodCompoundUniqueInput = {
+    endpointMatcher: string
+    method: string
+  }
+
   export type EndpointCountOrderByAggregateInput = {
     endpointMatcher?: SortOrder
+    method?: SortOrder
     handlerName?: SortOrder
     arguments?: SortOrder
   }
 
   export type EndpointMaxOrderByAggregateInput = {
     endpointMatcher?: SortOrder
+    method?: SortOrder
     handlerName?: SortOrder
     arguments?: SortOrder
   }
 
   export type EndpointMinOrderByAggregateInput = {
     endpointMatcher?: SortOrder
+    method?: SortOrder
     handlerName?: SortOrder
     arguments?: SortOrder
   }

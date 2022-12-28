@@ -10,6 +10,9 @@ generator client {
 
 model Endpoint {
   endpointMatcher String  @id // the endpoint matcher string used by msw to match endpoints
+  method          String // get, put, post, patch, options, delete, or all
   handlerName     String // the name of the handler to activate
   arguments       String? // JSON encoded arguments to pass dynamic data to the handler
+
+  @@unique([endpointMatcher, method])
 }

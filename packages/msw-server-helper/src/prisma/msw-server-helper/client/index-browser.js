@@ -91,6 +91,7 @@ function makeEnum(x) { return x; }
 
 exports.Prisma.EndpointScalarFieldEnum = makeEnum({
   endpointMatcher: 'endpointMatcher',
+  method: 'method',
   handlerName: 'handlerName',
   arguments: 'arguments'
 });

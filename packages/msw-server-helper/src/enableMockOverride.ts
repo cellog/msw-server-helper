@@ -1,16 +1,22 @@
 import { MswServerHelperError } from './MswServerHelperError'
 import { PrismaClient } from './prisma/msw-server-helper/client'
-import type { EnableMockOverrideProps, EndpointMockShape } from './types'
+import type {
+  EnableMockOverrideProps,
+  EndpointMockShape,
+  Methods,
+} from './types'
 
 export async function enableMockOverride<
   EndpointMocks extends EndpointMockShape,
   Endpoint extends keyof EndpointMocks = keyof EndpointMocks,
-  Override extends keyof EndpointMocks[Endpoint] = keyof EndpointMocks[Endpoint]
+  Method extends keyof EndpointMocks[Endpoint] = keyof EndpointMocks[Endpoint],
+  Override extends keyof EndpointMocks[Endpoint][Method] = keyof EndpointMocks[Endpoint][Method]
 >({
   endpoint,
   override,
+  method,
   args,
-}: EnableMockOverrideProps<EndpointMocks, Endpoint, Override>) {
+}: EnableMockOverrideProps<EndpointMocks, Endpoint, Method, Override>) {
   const client = new PrismaClient()
 
   try {
@@ -18,6 +24,7 @@ export async function enableMockOverride<
       update: {
         endpointMatcher: endpoint as string,
         handlerName: override as string,
+        method: method as Methods,
         ...(args === undefined
           ? {}
           : {
@@ -27,6 +34,7 @@ export async function enableMockOverride<
       create: {
         endpointMatcher: endpoint as string,
         handlerName: override as string,
+        method: method as Methods,
         ...(args === undefined
           ? {}
           : {

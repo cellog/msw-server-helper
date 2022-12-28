@@ -1,0 +1,40 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1,
+    "workspacePrefix": "/Users/gregorybeaver/Documents/GitHub/msw-server-helper"
+  },
+  "1 info pnpm": {
+    "err": {
+      "name": "Error",
+      "message": "Command failed with ENOENT: dlx create-remix@latest --template remix-run/indie-stack\nspawn dlx ENOENT",
+      "code": "ENOENT",
+      "stack": "Error: Command failed with ENOENT: dlx create-remix@latest --template remix-run/indie-stack\nspawn dlx ENOENT\n    at Process.ChildProcess._handle.onexit (node:internal/child_process:282:19)\n    at onErrorNT (node:internal/child_process:477:16)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)"
+    }
+  },
+  "2 error pnpm": {
+    "errno": -2,
+    "code": "ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL",
+    "syscall": "spawn dlx",
+    "path": "dlx",
+    "spawnargs": [
+      "create-remix@latest",
+      "--template",
+      "remix-run/indie-stack"
+    ],
+    "originalMessage": "spawn dlx ENOENT",
+    "shortMessage": "Command failed with ENOENT: dlx create-remix@latest --template remix-run/indie-stack\nspawn dlx ENOENT",
+    "command": "dlx create-remix@latest --template remix-run/indie-stack",
+    "escapedCommand": "dlx \"create-remix@latest\" --template \"remix-run/indie-stack\"",
+    "failed": true,
+    "timedOut": false,
+    "isCanceled": false,
+    "killed": false,
+    "prefix": "/Users/gregorybeaver/Documents/GitHub/msw-server-helper",
+    "err": {
+      "name": "Error",
+      "message": "Command failed with ENOENT: dlx create-remix@latest --template remix-run/indie-stack\nspawn dlx ENOENT",
+      "code": "ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL",
+      "stack": "Error: Command failed with ENOENT: dlx create-remix@latest --template remix-run/indie-stack\nspawn dlx ENOENT\n    at Process.ChildProcess._handle.onexit (node:internal/child_process:282:19)\n    at onErrorNT (node:internal/child_process:477:16)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)"
+    }
+  }
+}

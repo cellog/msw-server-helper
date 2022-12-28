@@ -1,0 +1,15 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./node_modules/msw-server-helper.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./msw-server-helper/client"
+}
+
+model Endpoint {
+  endpointMatcher String  @id // the endpoint matcher string used by msw to match endpoints
+  handlerName     String // the name of the handler to activate
+  arguments       String? // JSON encoded arguments to pass dynamic data to the handler
+}

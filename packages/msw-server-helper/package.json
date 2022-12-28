@@ -2,9 +2,15 @@
   "name": "@gregcello/msw-server-helper",
   "version": "1.0.0",
   "description": "Dynamic modification of node mock service worker mocks from within browser-based tests like Cypress and Playwright",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "esm/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:prisma": "prisma generate --schema src/prisma/schema.prisma",
+    "build:db": "prisma db push --schema src/prisma/schema.prisma",
+    "build:commonjs": "tsc --module commonjs --outDir dist",
+    "build:esm": "tsc --module esnext --outDir esm",
+    "build": "pnpm run build:prisma && pnpm run build:db && pnpm run build:commonjs && pnpm run build:esm",
+    "setup": "pnpm run build:prisma && pnpm run build:db"
   },
   "keywords": [],
   "author": "Gregory Beaver <greg.beaver.cello@gmail.com>",
@@ -13,9 +19,9 @@
     "msw": ">= 0.49.2"
   },
   "dependencies": {
+    "@prisma/client": "4.8.0",
     "prisma": "4.8.0"
   },
-  "postinstall": "npx prisma@4.8.0 generate --schema node_modules/msw-server-helper/src/prisma/schema.prisma",
   "devDependencies": {
     "rimraf": "3.0.2",
     "typescript": "4.9.4"

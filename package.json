@@ -7,6 +7,7 @@
   "main": "index.js",
   "scripts": {
     "prepare:pr": "pnpm changeset",
+    "cypress:dev": "pnpm --filter remix-example dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

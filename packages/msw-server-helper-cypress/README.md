@@ -20,7 +20,7 @@ pnpm add @gregcello/msw-server-helper-cypress @gregcello/msw-server-helper msw
 
 ```ts
 // inside server-mocks.js
-import { getHandlers } from "@gregcello/msw-server-helper";
+import { getHandlers, declareHandlers } from "@gregcello/msw-server-helper";
 import { rest } from "msw"
 
 export const handlerOverrides = declareHandlers({

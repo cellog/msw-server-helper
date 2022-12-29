@@ -39,3 +39,17 @@ export interface EnableMockOverrideProps<
   method: Method
   args?: Array<any>
 }
+
+export interface RestMatcher<Args = unknown> {
+  endpointMatcher: string
+  method: Methods
+  handlerName: string
+  arguments: Args | undefined
+}
+
+export interface SqliteMatcher {
+  endpointMatcher: string
+  method: Methods
+  handlerName: string
+  arguments: string
+}

@@ -1,6 +1,6 @@
 {
   "name": "@gregcello/msw-server-helper-cypress",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Dynamic modification of node mock service worker mocks from within browser-based tests like Cypress and Playwright",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -15,7 +15,7 @@
   "author": "Gregory Beaver <greg.beaver.cello@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
-    "@gregcello/msw-server-helper": "workspace:^0.1.0",
+    "@gregcello/msw-server-helper": "workspace:^1.0.0",
     "cypress": ">= 12.2.0",
     "msw": ">= 0.49.2"
   },
@@ -23,7 +23,7 @@
     "prisma": "4.8.0"
   },
   "devDependencies": {
-    "@gregcello/msw-server-helper": "workspace:^0.1.0",
+    "@gregcello/msw-server-helper": "workspace:^1.0.0",
     "@types/node": "^18.11.9",
     "cypress": "12.2.0"
   }

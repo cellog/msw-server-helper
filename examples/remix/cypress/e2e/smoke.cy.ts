@@ -36,7 +36,7 @@ describe("smoke tests", () => {
     cy.enableMockOverride<typeof handlerOverrides>({
       endpoint: "http://example.com",
       method: "get",
-      override: "specifyUser",
+      override: "custom",
       args: ["<html><head></head><body>Custom!</body></html>"],
     });
     cy.visit("/");

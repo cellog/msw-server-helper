@@ -75,3 +75,13 @@ enableMockOverride({
 ```
 
 Full type safety is available - `enableMockOverride` will have type errors if endpoint, method, or override does not exist in the handler overrides.
+
+### resetting all server mocks
+
+To reset all server mocks to the pass-through state, use `resetMockOverrides`
+
+```ts
+import { resetMockOverrides } from "@gregcello/msw-server-helper";
+
+resetMockOverrides();
+```

@@ -17,5 +17,6 @@ Cypress.on("uncaught:exception", (err) => {
 addCommands();
 
 beforeEach(() => {
+  // reset all existing server msw mocks between tests
   cy.resetMockOverrides();
 });

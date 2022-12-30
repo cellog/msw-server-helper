@@ -13,7 +13,7 @@ export const handlerOverrides = declareHandlers({
       fail: (req, res, ctx) => {
         return res(ctx.status(500));
       },
-      specifyUser: (req, res, ctx, args) => {
+      custom: (req, res, ctx, args) => {
         const [responseBody] = (args as [string] | undefined) || [
           "<html><head></head><body>Totally fake response</body></html>",
         ];

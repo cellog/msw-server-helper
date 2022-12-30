@@ -53,3 +53,41 @@ export interface SqliteMatcher {
   handlerName: string
   arguments: string
 }
+
+/**
+ * A convenience type for when you want to use TS without using TS in msw
+ * @example
+ *
+ * type Mocks = HandlerShape<{
+ *   "https://api.github.com/user/:login": {
+ *     get: ["success", "fail", "specifyUser"],
+ *   },
+ * }>
+ *
+ * // ...
+ *
+ * describe("...", () => {
+ *   it("...", () => {
+ *     cy.enableMockOverride<Mocks>({
+ *       endpoint: "https://api.github.com/user/:login",
+ *       method: "get",
+ *       override: "success"
+ *     });
+ *   });
+ * });
+ */
+export type HandlerShape<
+  EndpointMocks extends {
+    [endpointMatcher: string]: {
+      [method in Methods]?: string[]
+    }
+  }
+> = {
+  [EndpointMatcher in keyof EndpointMocks]: {
+    [Method in keyof EndpointMocks[EndpointMatcher]]: {
+      [Override in EndpointMocks[EndpointMatcher][Method] extends string[]
+        ? EndpointMocks[EndpointMatcher][Method][number]
+        : '']: Handler
+    }
+  }
+}

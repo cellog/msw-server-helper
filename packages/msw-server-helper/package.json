@@ -1,6 +1,6 @@
 {
   "name": "@gregcello/msw-server-helper",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Dynamic modification of node mock service worker mocks from within browser-based tests like Cypress and Playwright",
   "main": "dist/index.js",
   "module": "esm/index.js",

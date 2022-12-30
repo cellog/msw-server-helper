@@ -6,7 +6,8 @@
   "description": "Dynamic modification of node mock service worker mocks from within browser-based tests like Cypress and Playwright",
   "main": "index.js",
   "scripts": {
-    "prepare:pr": "pnpm changeset",
+    "prepare:pr": "pnpm changeset version && pnpm i",
+    "publish:dry-run": "pnpm -r publish --dry-run",
     "cypress:dev": "pnpm --filter remix-example dev",
     "test:cypress": "pnpm --filter remix-example test:e2e:dev",
     "test": "echo \"Error: no test specified\" && exit 1"

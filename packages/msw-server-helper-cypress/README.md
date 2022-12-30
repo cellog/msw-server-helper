@@ -8,15 +8,15 @@ An example using remix based on the Indie stack is at https://github.com/cellog/
 ## Installation
 
 ```
-npm i @gregcello/msw-server-helper-cypress @gregcello/msw-server-helper msw
+npm i @gregcello/msw-server-helper-cypress @gregcello/msw-server-helper msw sqlite3
 ```
 
 ```
-yarn add @gregcello/msw-server-helper-cypress @gregcello/msw-server-helper msw
+yarn add @gregcello/msw-server-helper-cypress @gregcello/msw-server-helper msw sqlite3
 ```
 
 ```
-pnpm add @gregcello/msw-server-helper-cypress @gregcello/msw-server-helper msw
+pnpm add @gregcello/msw-server-helper-cypress @gregcello/msw-server-helper msw sqlite3
 ```
 
 ## Usage
@@ -53,11 +53,12 @@ export const handlers = [
 ];
 ```
 
-Cypress can then be set up in 3 areas:
+Cypress can then be set up in 4 areas:
 
 # `cypress.config.ts` to add the `enableMockOverride` and `resetMockOverride` tasks
 # `cypress/support/e2e.ts` to add custom commands `cy.enableMockOverride` and `cy.resetMockOverrides`
 # a `beforeEach` that calls `cy.resetMockOverrides`
+# add `@gregcello/msw-server-helper-cypress` to `tsconfig.json` `types`
 
 
 in `cypress.config.ts`:
@@ -93,6 +94,16 @@ beforeEach(() => {
   // reset all existing server msw mocks between tests
   cy.resetMockOverrides();
 });
+```
+
+in `tsconfig.json`
+
+add `msw-server-helper-cypress` to `"types"`
+
+For example:
+
+```json
+    "types": ["node", "cypress", "@testing-library/cypress", "@gregcello/msw-server-helper-cypress"],
 ```
 
 ## Usage in tests
@@ -133,6 +144,7 @@ For starters like the Indie Stack (https://github.com/remix-run/indie-stack) a f
 - is msw mocks are typescript modify package.json to remove `binode -r ./mocks`
 - if msw mocks are typescript, modify `entry.server.tsx` to load the mocks
 - reorganize the mocks to make it crystal clear these only get enabled in the server
+- update `types` in tsconfig.json
 
 If you wish to have maximum type safety in tests, 3 steps are needed to enable type-safe mocks.
 
@@ -172,6 +184,12 @@ console.info("🔶 Mock server running");
 
 process.once("SIGINT", () => server.close());
 process.once("SIGTERM", () => server.close());
+```
+
+Update `cypress/tsconfig.json` to have this `"types"` line:
+
+```json
+    "types": ["node", "cypress", "@testing-library/cypress", "@gregcello/msw-server-helper-cypress"],
 ```
 
 ### Javascript
@@ -227,9 +245,10 @@ type Mocks = HandlerShape<{
 }>
 ```
 
-This has serious risks: you are declaring types, but if the mocks change, and you don't update the `Mocks` type in the test, it will give
-type safety assurances without actually being type-safe. Hopefully, the test will also fail, but this is not a guarantee, whereas using typescript
-for mocks does guarantee instant feedback if a test is relying upon a stale mock. When `msw-server-helper` is unable to find a mock, it will
-ignore a request to override it, and the test will instead hit the live endpoint. Should that endpoint return the same value that was mocked, no
-indication of failure will occur until the test is running in CI and is suddenly flaky because it's not actually mocking the endpoint.
-Use this solution at your own risk!
+> This has serious risks: you are declaring types, but if the mocks change, and you don't update the `Mocks` type in the test, it will give type safety assurances without actually being type-safe. Hopefully, the test will also fail, but this is not a guarantee, whereas using typescript for mocks does guarantee instant feedback if a test is relying upon a stale mock. When `msw-server-helper` is unable to find a mock, it will ignore a request to override it, and the test will instead hit the live endpoint. Should that endpoint return the same value that was mocked, no indication of failure will occur until the test is running in CI and is suddenly flaky because it's not actually mocking the endpoint. Use this solution at your own risk!
+
+Finally, update `cypress/tsconfig.json` to have this `"types"` line:
+
+```json
+    "types": ["node", "cypress", "@testing-library/cypress", "@gregcello/msw-server-helper-cypress"],
+```

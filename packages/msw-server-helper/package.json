@@ -11,8 +11,22 @@
     "build": "rimraf dist && rimraf esm && pnpm run build:commonjs && pnpm run build:esm && pnpm run build:db",
     "setup": "pnpm run build"
   },
-  "keywords": [],
+  "keywords": [
+    "msw",
+    "remix",
+    "cypress",
+    "nextjs",
+    "playwright"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cellog/msw-server-helper.git"
+  },
   "author": "Gregory Beaver <greg.beaver.cello@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/cellog/msw-server-helper/issues"
+  },
+  "homepage": "https://github.com/cellog/msw-server-helper#readme",
   "license": "MIT",
   "peerDependencies": {
     "msw": ">= 0.49.2",

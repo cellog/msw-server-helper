@@ -11,7 +11,21 @@
     "build": "pnpm run build:commonjs && pnpm run build:esm",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "msw",
+    "remix",
+    "cypress",
+    "nextjs",
+    "playwright"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cellog/msw-server-helper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cellog/msw-server-helper/issues"
+  },
+  "homepage": "https://github.com/cellog/msw-server-helper#readme",
   "author": "Gregory Beaver <greg.beaver.cello@gmail.com>",
   "license": "MIT",
   "peerDependencies": {

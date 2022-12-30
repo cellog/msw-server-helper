@@ -1,4 +1,8 @@
 import { defineConfig } from "cypress";
+import {
+  enableMockOverride,
+  resetMockOverrides,
+} from "@gregcello/msw-server-helper-cypress";
 
 export default defineConfig({
   e2e: {
@@ -19,6 +23,8 @@ export default defineConfig({
 
           return null;
         },
+        enableMockOverride,
+        resetMockOverrides,
       });
 
       return { ...config, ...configOverrides };

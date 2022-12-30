@@ -1,5 +1,5 @@
 import "@testing-library/cypress/add-commands";
-import "./commands";
+import { addCommands } from "@gregcello/msw-server-helper-cypress/addCommands";
 
 Cypress.on("uncaught:exception", (err) => {
   // Cypress and React Hydrating the document don't get along
@@ -12,4 +12,10 @@ Cypress.on("uncaught:exception", (err) => {
   ) {
     return false;
   }
+});
+
+addCommands();
+
+beforeEach(() => {
+  cy.resetMockOverrides();
 });

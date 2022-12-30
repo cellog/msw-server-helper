@@ -1,51 +1,48 @@
-import { faker } from "@faker-js/faker";
+import type { handlerOverrides } from "../../app/mocks/server/mocks";
 
 describe("smoke tests", () => {
-  afterEach(() => {
-    cy.cleanupUser();
+  it("should display an API failed to load message if the fail handler is active", () => {
+    cy.enableMockOverride<typeof handlerOverrides>({
+      endpoint: "http://example.com",
+      method: "get",
+      override: "fail",
+    });
+    cy.visit("/");
+    cy.findByText("Error: failed to load").should("be.visible");
+    cy.findByText("Totally fake response").should("not.exist");
+    cy.findByText("More information...").should("not.exist");
   });
 
-  it("should allow you to register and login", () => {
-    const loginForm = {
-      email: `${faker.internet.userName()}@example.com`,
-      password: faker.internet.password(),
-    };
-
-    cy.then(() => ({ email: loginForm.email })).as("user");
-
-    cy.visitAndCheck("/");
-
-    cy.findByRole("link", { name: /sign up/i }).click();
-
-    cy.findByRole("textbox", { name: /email/i }).type(loginForm.email);
-    cy.findByLabelText(/password/i).type(loginForm.password);
-    cy.findByRole("button", { name: /create account/i }).click();
-
-    cy.findByRole("link", { name: /notes/i }).click();
-    cy.findByRole("button", { name: /logout/i }).click();
-    cy.findByRole("link", { name: /log in/i });
+  it("should display the actual API result if no mocking is enabled", () => {
+    cy.visit("/");
+    cy.findByText("More information...").should("be.visible");
+    cy.findByText("Error: failed to load").should("not.exist");
+    cy.findByText("Totally fake response").should("not.exist");
   });
 
-  it("should allow you to make a note", () => {
-    const testNote = {
-      title: faker.lorem.words(1),
-      body: faker.lorem.sentences(1),
-    };
-    cy.login();
+  it("should display an API success message if the success handler is active", () => {
+    cy.enableMockOverride<typeof handlerOverrides>({
+      endpoint: "http://example.com",
+      method: "get",
+      override: "success",
+    });
+    cy.visit("/");
+    cy.findByText("Totally fake response").should("be.visible");
+    cy.findByText("Error: failed to load").should("not.exist");
+    cy.findByText("More information...").should("not.exist");
+  });
 
-    cy.visitAndCheck("/");
-
-    cy.findByRole("link", { name: /notes/i }).click();
-    cy.findByText("No notes yet");
-
-    cy.findByRole("link", { name: /\+ new note/i }).click();
-
-    cy.findByRole("textbox", { name: /title/i }).type(testNote.title);
-    cy.findByRole("textbox", { name: /body/i }).type(testNote.body);
-    cy.findByRole("button", { name: /save/i }).click();
-
-    cy.findByRole("button", { name: /delete/i }).click();
-
-    cy.findByText("No notes yet");
+  it("should display a dynamic API success message if the success handler is active and accepts args", () => {
+    cy.enableMockOverride<typeof handlerOverrides>({
+      endpoint: "http://example.com",
+      method: "get",
+      override: "specifyUser",
+      args: ["<html><head></head><body>Custom!</body></html>"],
+    });
+    cy.visit("/");
+    cy.findByText("Custom!").should("be.visible");
+    cy.findByText("Totally fake response").should("not.exist");
+    cy.findByText("Error: failed to load").should("not.exist");
+    cy.findByText("More information...").should("not.exist");
   });
 });

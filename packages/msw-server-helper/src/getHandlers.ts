@@ -1,18 +1,16 @@
-import { Ctx, EndpointMockShape, Handler, Methods, Req, Res } from './types'
-import { PrismaClient } from './prisma/msw-server-helper/client'
 import { rest } from 'msw'
+import type { Ctx, EndpointMockShape, Methods, Req, Res } from './types'
+import { SqliteClient } from './SqliteClient'
 
-const client = new PrismaClient()
+const client = new SqliteClient()
 
 export function getHandlers(mocks: EndpointMockShape) {
-  return Object.entries(mocks).map(([endpoint, overrides]) => {
+  return Object.entries(mocks).flatMap(([endpoint, overrides]) => {
     return Object.entries(overrides).map(([method, handlers]) => {
       const interceptor = async (req: Req, res: Res, ctx: Ctx) => {
-        const result = await client.endpoint.findFirst({
-          where: {
-            endpointMatcher: endpoint,
-            method: method,
-          },
+        const result = await client.getMatcher({
+          endpointMatcher: endpoint,
+          method: method as Methods,
         })
         if (!result) {
           return req.passthrough()
@@ -21,12 +19,7 @@ export function getHandlers(mocks: EndpointMockShape) {
         if (!handler) {
           return req.passthrough()
         }
-        return handler(
-          req,
-          res,
-          ctx,
-          result.arguments === null ? undefined : JSON.parse(result.arguments)
-        )
+        return handler(req, res, ctx, result.arguments as any)
       }
       return rest[method as Methods](endpoint, interceptor as any)
     })

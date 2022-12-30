@@ -1,5 +1,5 @@
 import { MswServerHelperError } from './MswServerHelperError'
-import { PrismaClient } from './prisma/msw-server-helper/client'
+import { SqliteClient } from './SqliteClient'
 import type {
   EnableMockOverrideProps,
   EndpointMockShape,
@@ -17,39 +17,21 @@ export async function enableMockOverride<
   method,
   args,
 }: EnableMockOverrideProps<EndpointMocks, Endpoint, Method, Override>) {
-  const client = new PrismaClient()
+  const client = new SqliteClient()
 
   try {
-    await client.endpoint.upsert({
-      update: {
-        endpointMatcher: endpoint as string,
-        handlerName: override as string,
-        method: method as Methods,
-        ...(args === undefined
-          ? {}
-          : {
-              arguments: JSON.stringify(args),
-            }),
-      },
-      create: {
-        endpointMatcher: endpoint as string,
-        handlerName: override as string,
-        method: method as Methods,
-        ...(args === undefined
-          ? {}
-          : {
-              arguments: JSON.stringify(args),
-            }),
-      },
-      where: {
-        endpointMatcher: endpoint as string,
-      },
+    await client.setRestOverride({
+      endpointMatcher: endpoint as string,
+      handlerName: override as string,
+      method: method as Methods,
+      args: args === undefined ? undefined : args,
     })
+    return true
   } catch (e) {
     throw new MswServerHelperError(
       `Unable to register mock override "${override as string}" for "${
         endpoint as string
-      }"`,
+      }": ${(e as Error).message}`,
       e as Error
     )
   }

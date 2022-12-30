@@ -6,7 +6,6 @@ import type {
 } from '@gregcello/msw-server-helper'
 
 export * from './addTask'
-export * from './addCommands'
 
 declare global {
   namespace Cypress {
@@ -42,6 +41,7 @@ declare global {
           'declarations'
         >
       ): Chainable<Element>
+      resetMockOverrides(): void
     }
   }
 }

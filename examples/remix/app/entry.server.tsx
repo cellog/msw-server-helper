@@ -7,6 +7,11 @@ import { renderToPipeableStream } from "react-dom/server";
 
 const ABORT_DELAY = 5000;
 
+if (process.env.NODE_ENV === "development" || process.env.MSW_MOCKS) {
+  // enable mock service worker server-side intercepts
+  require("./mocks/server");
+}
+
 export default function handleRequest(
   request: Request,
   responseStatusCode: number,

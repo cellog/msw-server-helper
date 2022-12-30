@@ -12,7 +12,7 @@ FROM base as deps
 
 WORKDIR /myapp
 
-ADD package.json .npmrc ./
+ADD package.json pnpm-lock.yaml .npmrc ./
 RUN npm install --production=false
 
 # Setup production node_modules
@@ -21,7 +21,7 @@ FROM base as production-deps
 WORKDIR /myapp
 
 COPY --from=deps /myapp/node_modules /myapp/node_modules
-ADD package.json .npmrc ./
+ADD package.json pnpm-lock.yaml .npmrc ./
 RUN npm prune --production
 
 # Build the app
@@ -36,6 +36,7 @@ RUN npm run build
 
 # Finally, build the production image with minimal footprint
 FROM base
+ENV PORT="8080"
 ENV NODE_ENV="production"
 
 # add shortcut for connecting to database CLI

@@ -9,15 +9,15 @@ This version only supports REST endpoints
 ## Installation
 
 ```
-npm i @gregcello/msw-server-helper msw
+npm i @gregcello/msw-server-helper msw sqlite3
 ```
 
 ```
-yarn add @gregcello/msw-server-helper msw
+yarn add @gregcello/msw-server-helper msw sqlite3
 ```
 
 ```
-pnpm add @gregcello/msw-server-helper msw
+pnpm add @gregcello/msw-server-helper msw sqlite3
 ```
 
 ## Usage

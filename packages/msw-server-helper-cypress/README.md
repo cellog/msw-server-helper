@@ -85,7 +85,7 @@ export default defineConfig({
 in `cypress/support/e2e.ts`:
 
 ```ts
-import { addCommands } from "@gregcello/msw-server-helper-cypress";
+import { addCommands } from "@gregcello/msw-server-helper-cypress/addCommands";
 
 addCommands();
 

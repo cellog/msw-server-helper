@@ -113,7 +113,7 @@ import type { handlerOverrides } from "path/to/msw/mocks/server";
 
 describe("...", () => {
   it("...", () => {
-    cy.enableMockOverrides<typeof handlerOverrides>({
+    cy.enableMockOverride<typeof handlerOverrides>({
       endpoint: "https://api.github.com/user/:login",
       method: "get",
       override: "fail",
@@ -123,7 +123,7 @@ describe("...", () => {
   });
 
   it("...", () => {
-    cy.enableMockOverrides<typeof handlerOverrides>({
+    cy.enableMockOverride<typeof handlerOverrides>({
       endpoint: "https://api.github.com/user/:login",
       method: "get",
       override: "specifyUser",
